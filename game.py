@@ -4,13 +4,16 @@ print("Hello!")
 name = raw_input("What is your name: ")
 print("%s, I'm thinking of a number between 1 and 100.") % name
 print("Try to guess my number.")
-number = random.randint(1,100)
+number = random.randint(1, 100)
 guess = None
-too_high = 101
-too_low = 0
+num_guess = 0
 
 while number != guess:
-    guess = (too_high-too_low)/2 + too_low
-    print guess
-    guess= number
-    
+    guess = raw_input("What is your guess: ")
+    num_guess += 1
+    if guess > number:
+        print "Your guess is too high. Try again."
+    if guess < number:
+        print "Your guess is too low. Try again"
+
+print("Well done, %s! You found my number in %d tries.") % (name, num_guess)
