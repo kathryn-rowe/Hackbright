@@ -9,7 +9,7 @@ guess = None
 num_guess = 0
 
 while number != guess:
-    guess = raw_input("What is your guess: ")
+    guess = int(raw_input("What is your guess: "))
     num_guess += 1
     if guess > number:
         print "Your guess is too high. Try again."
