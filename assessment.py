@@ -129,17 +129,12 @@ def largest_n_items(items, n):
         >>> largest_n_items([3, 3, 3, 2, 1], 2)
         [3, 3]
     """
-    ascending_order_list = []
-    while len(items) < n:
-        maximum_number = items[0]
-        for number in items:
-            if number > maximum_number:
-                maximum_number = number
-        n = n - 1
-        ascending_order_list.append(maximum_number)
-        items.remove(maximum_number)
-    return ascending_order_list
-
+    ascending_order = sorted(items)
+    if n != 0:
+        largest_n_items = ascending_order[-n:]
+        return largest_n_items
+    else:
+        return []
 
 #####################################################################
 # END OF ASSESSMENT: You can ignore everything below.
