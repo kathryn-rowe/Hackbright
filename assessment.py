@@ -95,7 +95,7 @@ def learn_persons_name_hometown(hometown, first_name, last_name):
     """Finding the hometown, first name and last name of someone.
 
     Combine all these attributes, call previous functions ()"""
-    
+
 
 ###############################################################################
 
@@ -109,7 +109,10 @@ def learn_persons_name_hometown(hometown, first_name, last_name):
 def is_berry(fruit):
     """Determines if fruit is a berry"""
 
-    pass
+    if fruit == "strawberry" or fruit == "cherry" or fruit == "blackberry":
+        return True
+    else:
+        return False
 
 
 # (b) Write another function, shipping_cost(), which calculates shipping cost
@@ -120,18 +123,29 @@ def is_berry(fruit):
 def shipping_cost(fruit):
     """Calculates shipping cost of fruit"""
 
-    pass
+    if is_berry(fruit) is True:
+        return 0
+    else:
+        return 5
+
 
 
 # 2. Make a function that takes in a number and a list of numbers. It should
 #    return a new list containing the elements of the input list, along with
 #    given number, which should be at the end of the new list.
 
+
 def append_to_list(lst, num):
     """Creates a new list consisting of the old list with the given number
        added to the end."""
 
-    pass
+    new_list = []
+    for number in lst:
+        new_list.append(number)
+
+    new_list.append(num)
+
+    return new_list
 
 
 
@@ -151,9 +165,37 @@ def append_to_list(lst, num):
 #    Your function should return the total cost of the item, including tax and
 #    fees.
 
-def calculate_price(FILL_ME_IN):
 
-    pass
+def calculate_price(item_price, state_abbrev, tax_percent=0.05):
+    """Calculate the total amount of an item after taxes and fees are applied
+
+    Find tax by multipling rate to the item price and then adding that amount
+    to the item price. Find the fee by..."""
+
+    if state_abbrev == "CA" or state_abbrev == "ca":
+        ca_fee = .03
+        if tax_percent != 0.05:
+            total_price = (item_price * (tax_percent / 100.0)) + item_price
+        else:
+            total_price = ((item_price * 0.05) + item_price) * ca_fee
+        return total_price
+    elif state_abbrev == "PA" or state_abbrev == "pa":
+        pa_fee = 2.0
+         if tax_percent != 0.05:
+            price_with_tax = (item_price * (tax_percent / 100.0)) + item_price
+        else:
+            total_price = ((item_price * 0.05) + item_price) * ca_fee
+        total_price = price_with_tax + pa_fee
+        return total_price
+    elif state_abbrev == "MA" or state_abbrev == "ma":
+        if item_price < 100:
+            ma_fee_less_100 = 1.0
+            total_price = price_with_tax + ma_fee_less_100
+            return total_price
+        else:
+            ma_fee_more_100 = 3.0
+            total_price = price_with_tax + ma_fee_more_100
+            return total_price
 
 
 ###############################################################################
