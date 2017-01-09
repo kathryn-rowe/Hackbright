@@ -249,8 +249,20 @@ def calculate_price(item_price, state_abbrev, tax_percent=0.05):
 # write a Python function that takes in an arbitrary number of arguments.
 
 
-# def append_arguments_to_list(input_list, ):
-#     new_list = []
+def append_arguments_to_list(input_list, *args):
+    """This function takes in a list and any number of additional number of
+    arguments, appends them to the list, and returns the entire list."""
+
+    #create empty list to put in arguments
+    new_list = []
+
+    for item in input_list:
+        #iterate of the list given and add them to the empty list.
+        new_list.append(item)
+    for argument in args:
+        #iterate over the unknown amount of arguments and add each one to the new list.
+        new_list.append(argument)
+    return new_list
 
 # 2. Make a new function with a nested inner function.
 # The outer function will take in a word.
@@ -265,8 +277,16 @@ def calculate_price(item_price, state_abbrev, tax_percent=0.05):
 #('Balloonicorn', 'BalloonicornBalloonicornBalloonicorn')
 
 
-# def nested_function(inner_function()):
+def get_word(word):
+    """Function gets word as argument"""
 
+    def mult_by_three(argument):
+        """Multiples argument by 3, no spacing"""
+
+        return argument * 3
+
+    #returns the word used as the argument and a non-spaced version of that word.
+    return word, mult_by_three(word)
 
 ###############################################################################
 
