@@ -5,6 +5,7 @@ def all_odd(numbers):
     #create an empty string
 
     for each_number in numbers:
+        #iterate through numbers list and if the difference from division is 2, then it's even.
         if each_number % 2 == 1:
             odd_numbers.append(each_number)
 
@@ -57,11 +58,12 @@ def largest_n_items(items, n):
     #sort in ascending order the list passed as an argument.
 
     if n != 0:
+        #iterate through ascending order list and take the nth largest numbers from the right.
         largest_n_items = ascending_order[-n:]
         return largest_n_items
-        #iterate through ascending order list and take the nth largest numbers from the right.
     else:
         return []
+        #if there aren't any arguments passed, return empty list per instructions.
 
 #####################################################################
 # END OF ASSESSMENT: You can ignore everything below.
