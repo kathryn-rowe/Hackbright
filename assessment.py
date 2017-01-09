@@ -167,36 +167,72 @@ def append_to_list(lst, num):
 
 
 def calculate_price(item_price, state_abbrev, tax_percent=0.05):
-    """Calculate the total amount of an item after taxes and fees are applied
+    """Calculate the total amount of an item after applicable taxes and fees
+    are applied.
 
     Find tax by multipling rate to the item price and then adding that amount
-    to the item price. Find the fee by..."""
+    to the item price. Find the fee by state abbreviation. Each state has its
+    own fee codes. Function below uses fee examples given in directions. Total
+    calculated price includes tax and state fee."""
 
     if state_abbrev == "CA" or state_abbrev == "ca":
+    #state abbreviation is suppose to be a two-letter input. Could include a
+    #try-except statement to catch inputs longer than two letters.
+
         ca_fee = .03
-        if tax_percent != 0.05:
-            total_price = (item_price * (tax_percent / 100.0)) + item_price
+
+        if tax_percent != .05:
+            price_with_tax = (item_price * (tax_percent / 100)) + item_price
+            total_price = (price_with_tax * ca_fee) + price_with_tax
+            return round(total_price, 1)
         else:
-            total_price = ((item_price * 0.05) + item_price) * ca_fee
-        return total_price
+            price_with_tax = ((item_price * .05) + item_price)
+            total_price = (price_with_tax * ca_fee) + price_with_tax
+            return round(total_price, 1)
+
     elif state_abbrev == "PA" or state_abbrev == "pa":
+    #state abbreviation is suppose to be a two-letter input. Could include a
+    #try-except statement to catch inputs longer than two letters.
+
         pa_fee = 2.0
-         if tax_percent != 0.05:
-            price_with_tax = (item_price * (tax_percent / 100.0)) + item_price
+
+        if tax_percent != 0.05:
+            price_with_tax = (item_price * (tax_percent / 100)) + item_price
+            total_price = price_with_tax + pa_fee
+            return round(total_price, 1)
         else:
-            total_price = ((item_price * 0.05) + item_price) * ca_fee
-        total_price = price_with_tax + pa_fee
-        return total_price
+            total_price = ((item_price * 0.05) + item_price) + pa_fee
+            return round(total_price, 1)
+
     elif state_abbrev == "MA" or state_abbrev == "ma":
+    #state abbreviation is suppose to be a two-letter input. Could include a
+    #try-except statement to catch inputs longer than two letters.
+
         if item_price < 100:
             ma_fee_less_100 = 1.0
-            total_price = price_with_tax + ma_fee_less_100
-            return total_price
+            if tax_percent != 0.05:
+                price_with_tax = (item_price * (tax_percent / 100)) + item_price
+                total_price = price_with_tax + ma_fee_less_100
+                return round(total_price, 1)
+            else:
+                total_price = ((item_price * 0.05) + item_price) + ma_fee_less_100
+                return round(total_price, 1)
         else:
             ma_fee_more_100 = 3.0
-            total_price = price_with_tax + ma_fee_more_100
-            return total_price
-
+            if tax_percent != 0.05:
+                price_with_tax = (item_price * (tax_percent / 100)) + item_price
+                total_price = price_with_tax + ma_fee_more_100
+                return round(total_price, 1)
+            else:
+                total_price = ((item_price * 0.05) + item_price) + ma_fee_more_100
+                return round(total_price, 1)
+    else:
+        if tax_percent != 0.05:
+            price_with_tax = (item_price * (tax_percent / 100)) + item_price
+            return price_with_tax
+        else:
+            total_price = (item_price * 0.05) + item_price
+            return round(total_price, 1)
 
 ###############################################################################
 
@@ -213,6 +249,9 @@ def calculate_price(item_price, state_abbrev, tax_percent=0.05):
 # write a Python function that takes in an arbitrary number of arguments.
 
 
+# def append_arguments_to_list(input_list, ):
+#     new_list = []
+
 # 2. Make a new function with a nested inner function.
 # The outer function will take in a word.
 # The inner function will multiply that word by 3.
@@ -224,6 +263,9 @@ def calculate_price(item_price, state_abbrev, tax_percent=0.05):
 
 #>>> outer("Balloonicorn")
 #('Balloonicorn', 'BalloonicornBalloonicornBalloonicorn')
+
+
+# def nested_function(inner_function()):
 
 
 ###############################################################################
