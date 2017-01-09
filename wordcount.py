@@ -26,7 +26,9 @@ def count_words(words_file):
     #     return words_count.get(word, 0)
 
     #print get_count("met")
-    for item, count in words_count.items():
+
+
+    for item, count in words_count.iteritems():
         print "%s, %d" % (item, count)
 
-count_words("test.txt")
+count_words("twain.txt")
