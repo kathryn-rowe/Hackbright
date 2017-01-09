@@ -180,7 +180,6 @@ def replace_third_and_last(input_list):
     >>> replace_third_and_last(multiples)
     >>> multiples == [0, 3, 37, 9, 12, 15, 18, 21, 24, 37]
     True
-
     """
     input_list[2] = 37
     input_list[-1] = 37
