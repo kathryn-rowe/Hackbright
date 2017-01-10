@@ -45,15 +45,15 @@ def collect_new_restaurant():
 
 def updating_restaurant(dic):
     """Updating a random restaurant rating score"""
-    updating_option = raw_input("""Would you like to\n
+    updating_option = raw_input("""Would you like to:\n
     1. Choose the restaurant to update, or \n
     2. Let us choose a random one?\n
     Please enter 1 or 2:  >>> \n""")
 
     if updating_option == "1":
-        restaurant_name = raw_input("""Options: Big Bean Shack, Chip shop, Diagon Alley cafe,\n
-            Eternelle's Elixir of Refreshment, Florean Fortescue's Ice Cream Parlour, Jellied Eel Shop,\n
-            Luchino Caffe, Ministry Munchies, The Bear & Staff, The Club, The Porcupine, or The Tavern.\n
+        restaurant_name = raw_input("""Options: Big Bean Shack, Chip shop, Diagon Alley cafe,
+            Eternelle's Elixir of Refreshment, Florean Fortescue's Ice Cream Parlour, Jellied Eel Shop,
+            Luchino Caffe, Ministry Munchies, The Bear & Staff, The Club, The Porcupine, or The Tavern.
             Restaurant name: """)
         restaurant_rating = dic[restaurant_name]
 
@@ -70,7 +70,7 @@ def updating_restaurant(dic):
         except Exception:
             print "Please enter a number between 1 - 5."
 
-    dic[random_restaurant_name] = new_rating
+    dic[restaurant_name] = new_rating
 
     return dic
 
