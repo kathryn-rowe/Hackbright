@@ -43,20 +43,20 @@ def make_text(chains):
 
     key = choice(chains.keys())
 
+    # if key == key[0].title():
+
     text = " ".join(key)
 
     while key in chains:
         word_two = key[1]
         word_three = choice(chains[key])
+        #word_four = choice(chains[key])
         text += " " + word_three
         key = (word_two, word_three)
 
     # import pprint
     # pprint.pprint(chains)
-    print text
-
-    #return text
-
+        return text
 
 input_path = "green-eggs.txt"
 
