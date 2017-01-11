@@ -41,12 +41,19 @@ def make_chains(text_string):
 def make_text(chains):
     """Takes dictionary of markov chains; returns random text."""
 
-    text = ""
+    key = choice(chains.keys())
 
-    for key, value in chains.items():
-        print key[1] + choice(value)
+    text = " ".join(key)
 
+    while key in chains:
+        word_two = key[1]
+        word_three = choice(chains[key])
+        text += " " + word_three
+        key = (word_two, word_three)
 
+    # import pprint
+    # pprint.pprint(chains)
+    print text
 
     #return text
 
