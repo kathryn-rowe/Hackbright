@@ -29,16 +29,17 @@ def make_chains(text_string):
 
     chains = {}
     #this finds how many words to put in the n_gram tuple
-    n_gram = int(raw_input("How many words do you want in your n_gram?: "))
+    #n_gram = int(raw_input("How many words do you want in your n_gram?: "))
 
-    tuple_n_gram = tuple(words[:n_gram])
+    #tuple_n_gram = tuple(words[:n_gram])
 
-    print tuple_n_gram
+    #print tuple_n_gram
 
-    for i in range(len(words) - n_gram):
-        following_word = words[i + n_gram]
-        chains[tuple_n_gram] = chains.get(tuple_n_gram, [])
-        chains[tuple_n_gram].append(following_word)
+    for i in range(len(words) - 2):
+        tuple_bi_gram = words[i], words[i + 1]
+        following_word = words[i + 2]
+        chains[tuple_bi_gram] = chains.get(tuple_bi_gram, [])
+        chains[tuple_bi_gram].append(following_word)
 
     return chains
 
