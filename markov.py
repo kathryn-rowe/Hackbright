@@ -49,19 +49,22 @@ def make_text(chains):
 
     key = choice(chains.keys())
 
+    # if key == key[0].title():
+
     text = " ".join(key)
     #need to change this to coorespond with how many words are going in the n_gram tuple.
     while key in chains:
         word_one = key[0]
         word_two = key[1]
         word_three = choice(chains[key])
+        #word_four = choice(chains[key])
         text += " " + word_three
         key = (word_two, word_three)
 
     # import pprint
     # pprint.pprint(chains)
-    return text
 
+    return text
 
 
 file_path = sys.argv[1]
