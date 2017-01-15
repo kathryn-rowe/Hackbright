@@ -10,27 +10,14 @@ def count_words(phrase):
     This function should take a single string and return a dictionary
     that has all of the distinct words as keys and the number of
     times that word appears in the string as values.
-
-    For example::
-
-        >>> print_dict(count_words("each word appears once"))
-        {'appears': 1, 'each': 1, 'once': 1, 'word': 1}
-
-    Words that appear more than once should be counted each time::
-
-        >>> print_dict(count_words("rose is a rose is a rose"))
-        {'a': 2, 'is': 2, 'rose': 3}
-
-    It's fine to consider punctuation part of a word (e.g., a comma
-    at the end of a word can be counted as part of that word) and
-    to consider differently-capitalized words as different::
-
-        >>> print_dict(count_words("Porcupine see, porcupine do."))
-        {'Porcupine': 1, 'do.': 1, 'porcupine': 1, 'see,': 1}
     """
+    # Seperate the phrase into seperate words.
     words = phrase.split(" ")
+    
     word_counts = {}
 
+    # Counts each word and puts it in the Word_counts dictionary with the word
+    # as the key and the count as the value.
     for word in words:
         word_counts[word] = word_counts.get(word, 0) + 1
 
@@ -69,6 +56,7 @@ def word_length_sorted(words):
 
     list_len_word_tuples = []
 
+    # Puts the key and corresponding values into tuples, and then puts in list.
     for key, value in word_length_dict.items():
         tuple_word = key, sorted(value)
         list_len_word_tuples.append(tuple(tuple_word))
@@ -114,8 +102,35 @@ def translate_to_pirate_talk(phrase):
         >>> translate_to_pirate_talk("my student is not a man!")
         'me swabbie be not a man!'
     """
+    pirate_dictionary = {"sir": "matey",
+                         "hotel": "fleabag inn",
+                         "student": "swabbie",
+                         "man": "matey",
+                         "professor": "foul blaggart",
+                         "restaurant": "galley",
+                         "your": "yer",
+                         "excuse": "arr",
+                         "students": "swabbies",
+                         "are": "be",
+                         "restroom": "head",
+                         "my": "me",
+                         "is": "be"}
+    word_line = ""
 
-    return ""
+    for item in phrase:
+        word_line = word_line + item
+
+    word_line = word_line.split()
+
+    pirate_sentence = ""
+
+    for word in word_line:
+        if word in pirate_dictionary:
+            pirate_sentence += pirate_dictionary[word] + " "
+        else:
+            pirate_sentence += word + " "
+
+    return pirate_sentence.rstrip()
 
 
 def kids_game(names):
