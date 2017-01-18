@@ -1,7 +1,9 @@
 body {
     font-family: sans-serif;
+    color: blue;
+    background-color: #FFC0CB;
 }
 
 form {
-    color: blue;
+    background-color: #FFC0CB;
 }

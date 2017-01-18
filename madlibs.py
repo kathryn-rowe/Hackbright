@@ -59,6 +59,10 @@ def show_madlib_form():
 def show_madlib():
     """Creates the madlib story based on user input """
 
+    madlib_templates = ["Cow jumped over the {{ noun }}", "The duck is {{ adjective }} {{ preposition }} waddles",
+                       "{{ person }} {{ verb }} {{ article }} {{ noun }}"]
+
+    sentence = choice(madlib_templates)
     person = request.args.get("person")
     color = request.args.get("color")
     noun = request.args.get("noun")
@@ -69,6 +73,7 @@ def show_madlib():
     punctuation = request.args.get("punctuation")
 
     return render_template("madlib.html",
+                           sentence=sentence,
                            person=person,
                            color=color,
                            noun=noun,
