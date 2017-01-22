@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, flash
 from flask_debugtoolbar import DebugToolbarExtension
 import secret_key
 
@@ -26,20 +26,23 @@ def application_form():
     return render_template("application-form.html", jobs=jobs)
 
 
-@app.route("/application-success")
+@app.route("/application-success", methods=["POST"])
 def application_success():
     """Returns a response that acknowledges their application"""
 
-    first_name = request.args.get("firstname")
-    last_name = request.args.get("lastname")
+    first_name = request.form.get("firstname")
+    last_name = request.form.get("lastname")
     applicant = first_name + " " + last_name
-    job_choice = request.args.get("open_position")
-    salary_requirement = request.args.get("salary_required")
+    job_choice = request.form.get("open_position")
+    salary_requirement = request.form.get("salary_required")
+
+    flash("Congratulations, you've applied to work for the FBI")
 
     return render_template("application-response.html",
                             applicant=applicant,
                             job_choice=job_choice,
                             salary_requirement=salary_requirement)
+
 
 
 if __name__ == "__main__":

@@ -1,18 +1,40 @@
 
 body {
     font-family: helvetica, sans-serif;
+    color: white;
+    background-image: url("../Images/background.jpg");
+    line-height: 22px;
+}
+
+h1{
+    text-align: center;
 }
 
 #submission_info {
-    background-color: yellow;
+    background-color: #FFE44B;
+    border: 0;
+    color: black;
 }
 
-.instructions {
-    border: 1px dotted black;
-    border-radius: 25px;
-    border-spacing: 50px; 
+#instructions {
+    border: 2px solid white;
+    border-spacing: 10px 10px; 
+    text-align: center;
 }
 
-.navbar-brand {
-    color: green;
+.navbar-default .navbar-header{
+    background-color: #F8F8F8;
+}
+
+#logo-image {
+    display: block;
+    margin: auto;
+    width: 50%;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    color: gray;
+    width: 100%;  /* required because fixed position */
 }
