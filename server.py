@@ -34,7 +34,7 @@ def application_success():
     last_name = request.args.get("lastname")
     applicant = first_name + " " + last_name
     job_choice = request.args.get("open_position")
-    salary_requirement = float(request.args.get("salary_required"))
+    salary_requirement = request.args.get("salary_required")
 
     return render_template("application-response.html",
                             applicant=applicant,
