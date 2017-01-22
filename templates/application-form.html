@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+    <h1>Application Form</h1>
+
+        <p class="instructions">
+            This application is <i>very</i> important. Please proof-read before submitting
+        </p>
+
+    <form action="/application-success">
+
+        <label for="firstname">First Name:</label>
+        <input id="submission_info" type="text" name="firstname">
+        <br>
+
+        <label for="lastname"><b>Last Name</b>:</label>
+        <input id="submission_info" type="text" name="lastname">
+        <br>
+
+        Job Applying for:
+            <select name="open_position">
+                {% for job_title in jobs %}
+                <option value="Software Engineer">{{ job_title }}</option>
+                {% endfor %}
+            </select>
+        <br>
+
+        <input type="submit" class="submission_info">
+
+    </form>
+
+{% endblock %}
