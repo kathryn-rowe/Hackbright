@@ -10,20 +10,19 @@ h1{
     text-align: center;
 }
 
+/* Change the background color of all of the form input boxes 
+and submit button to be yellow. */
 #submission_info {
     background-color: #FFE44B;
     border: 0;
     color: black;
 }
 
+/* Draw a border around the instruction box. */
 #instructions {
     border: 2px solid white;
     border-spacing: 10px 10px; 
     text-align: center;
-}
-
-.navbar-default .navbar-header{
-    background-color: #F8F8F8;
 }
 
 #logo-image {
@@ -36,5 +35,7 @@ footer {
     position: fixed;
     bottom: 0;
     color: gray;
-    width: 100%;  /* required because fixed position */
+    width: 100%; 
 }
+
+/* INLINE HTML: Change the text in the last name field to be bold. */

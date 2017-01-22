@@ -28,7 +28,8 @@ def application_form():
 
 @app.route("/application-success", methods=["POST"])
 def application_success():
-    """Returns a response that acknowledges their application"""
+    """Returns a response that acknowledges their application using
+    input fields of name, salary requirement, and job choice"""
 
     first_name = request.form.get("firstname")
     last_name = request.form.get("lastname")
@@ -42,7 +43,6 @@ def application_success():
                             applicant=applicant,
                             job_choice=job_choice,
                             salary_requirement=salary_requirement)
-
 
 
 if __name__ == "__main__":
