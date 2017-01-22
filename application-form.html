@@ -1,41 +1,43 @@
 <!doctype html>
 <html>
-<head>
-    <link rel="stylesheet" type="text/css" href="./styles.css">
-    <title>Application Form</title>
-</head>
-<body>
-    <h1>Application Form</h1>
 
-        <p class="instructions">
-            This application is <i>very</i> important. Please proof-read before submitting
+    <head>
+        <link rel="stylesheet" type="text/css" href="./styles.css">
+        <title>Application Form</title>
+    </head>
+
+    <body>
+        <h1>Application Form</h1>
+
+        <p id="instructions">
+            This application is <i>very</i> important. <br>Please proof-read before submitting
         </p>
 
-    <form>
-        <label for="firstname">First Name:</label>
-        <input id="submission_info" type="text" name="firstname">
-    </form>
-    <br>
+        <form action="/application-success" method="POST">
 
-    <form>
-        <label for="lastname"><b>Last Name</b>:</label>
-        <input id="submission_info" type="text" name="lastname">
-    </form>
-    <br>
+            <label for="firstname">First Name:</label>
+            <input id="submission_info" type="text" name="firstname">
+            <br>
 
-    <form>
-        Job Applying for:
-            <select name="open_position">
-                <option value="Software Engineer">Software Engineer</option>
-                <option value="QA Engineer">QA Engineer</option>
-                <option value="Product Manager">Product Manager</option>
-            </select>
-    </form>
-    <br>
+            <label for="lastname"><b>Last Name</b>:</label>
+            <input id="submission_info" type="text" name="lastname">
+            <br>
 
-    <form action="url-to-submit-form-to" methods="POST">
-        <input type="submit" class="submission_info">
-    </form>
+            <label for="jobapplying">Job Applying for:</label>
+                <select id="submission_info" name="open_position">
+                    <option value="Software Engineer">Software Engineer</option>
+                    <option value="QA Engineer">QA Engineer</option>
+                    <option value="Product Manager">Product Manager</option>
+                </select>
+            <br>
 
-</body>
+            <label for="salary_required">Your requested salary: $</label>
+            <input id="submission_info" type="text" placeholder="ex. 45000" name="salary_required">
+            <br>
+            
+            <input id="submission_info" type="submit" name="submit">
+
+        </form>
+
+    </body>
 </html>
