@@ -1,2 +1,14 @@
-/* Your CSS goes here */
 
+body {
+    font-family: helvetica, sans-serif;
+}
+
+#submission_info {
+    background-color: yellow;
+}
+
+.instructions {
+    border: 1px dotted black;
+    border-radius: 25px;
+    border-spacing: 50px; 
+}
