@@ -1,52 +1,44 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <link rel="stylesheet"
           href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="./styles.css">
+    <link rel="stylesheet" type="text/css" href="static/CSS/styles.css">
     <title>Application Form</title>
 </head>
 
 <body>
 
-<div class="navbar navbar-inverse navbar-static-top">
-    <div class="container">
-
-        <div class="navbar-header">
-            <img src="/static/img/ubermelon-logo.png">
-            <a class="navbar-brand" href="/">Ubermelon</a>
-        </div>
-
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="/cart">
-                        <img class="melon-cart"
-                             src="/static/img/watermelon.png">
-                        My Melon Cart
-                    </a>
-                </li>
-                <li><a href="/login">Log In</a></li>
-            </ul>
-        </div>
-
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand">Job Application</a>
     </div>
-</div>
 
-<div class="container">
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-  <!-- Show flashed messages -->
-  {% with messages = get_flashed_messages() %}
-      {% for message in messages %}
-          <div class="alert alert-warning">{{ message }}</div>
-      {% endfor %}
-  {% endwith %}
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
 
-  <!-- This is where the main content goes. -->
-  {% block body %}
-      BODY OF PAGE GOES HERE VIA INHERITANCE
-  {% endblock %}
+    <!-- Show flashed messages -->
+    {% with messages = get_flashed_messages() %}
+        {% for message in messages %}
+            <div class="alert alert-warning">{{ message }}</div>
+        {% endfor %}
+    {% endwith %}
 
-</div>
+    <!-- This is where the main content goes. -->
+    {% block body %}
+        BODY
+    {% endblock %}
 
+  </div>
+
+  <div id="footer">
+  Good luck!
+  </div>
 </body>
 </html>

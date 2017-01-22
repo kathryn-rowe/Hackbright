@@ -3,6 +3,6 @@
 {% block body %}
 
     Thank you, {{ applicant }}, for applying to be a {{ job_choice }}. Your
-    minimum salary requirement is {{  }}.
+    minimum salary requirement is ${{ salary_requirement|round(3) }}.
 
 {% endblock %}

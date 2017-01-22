@@ -20,6 +20,7 @@ def index():
 @app.route("/application-form")
 def application_form():
     """Sends user to Application Form."""
+
     jobs = ["Software Engineer", "QA Engineer", "Product Manager"]
 
     return render_template("application-form.html", jobs=jobs)
@@ -32,8 +33,8 @@ def application_success():
     first_name = request.args.get("firstname")
     last_name = request.args.get("lastname")
     applicant = first_name + " " + last_name
-    job_choice = request.args.get()
-    salary_requirement = request.args.get("")
+    job_choice = request.args.get("open_position")
+    salary_requirement = float(request.args.get("salary_required"))
 
     return render_template("application-response.html",
                             applicant=applicant,

@@ -1,7 +1,6 @@
 
 body {
     font-family: helvetica, sans-serif;
-    text-align: center;
 }
 
 #submission_info {
@@ -12,4 +11,8 @@ body {
     border: 1px dotted black;
     border-radius: 25px;
     border-spacing: 50px; 
+}
+
+.navbar-brand {
+    color: green;
 }

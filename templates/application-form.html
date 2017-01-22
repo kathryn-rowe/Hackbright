@@ -21,9 +21,13 @@
         Job Applying for:
             <select name="open_position">
                 {% for job_title in jobs %}
-                <option value="Software Engineer">{{ job_title }}</option>
+                <option value="{{ job_title }}">{{ job_title }}</option>
                 {% endfor %}
             </select>
+        <br>
+
+        <label for="salary_required">Your requested salary:</label>
+        <input id="submission_info" type="text" name="salary_required">
         <br>
 
         <input type="submit" class="submission_info">
