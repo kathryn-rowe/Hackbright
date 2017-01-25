@@ -7,5 +7,14 @@
     <h1>Title: {{ title }}</h1>
     <h2>Description: {{ description }}</h2>
     <h2>Max Grade: {{ max_grade }}</h2>
+
+<h3>Students who have also completed {{ title }}</h3>
+    <ul>
+        {% for student_name, grade in name_and_grade %}
+            <li>Student Name: {{ student_name }}<br>
+                Grade: {{ grade }}</li>
+        {% endfor %}
+    </ul>
+
 </body>
 </html>

@@ -73,17 +73,20 @@ def student_add():
                            lname=lname,
                            github=github)
 
+
 @app.route("/project")
 def view_project():
     """Sends user to project information page."""
 
     title = request.args.get('title')
     title, description, max_grade = hackbright.get_project_by_title(title)
+    name_and_grade = hackbright.get_grades_by_title(title)
 
     return render_template('project-details.html',
                            title=title,
                            description=description,
-                           max_grade=max_grade)
+                           max_grade=max_grade,
+                           name_and_grade=name_and_grade)
 
 
 if __name__ == "__main__":
