@@ -12,7 +12,7 @@
 {% if project_and_grade %}
     <ul>
         {% for project_title, grade in project_and_grade %}
-            <li>Project: {{ project_title }}, Grade: {{ grade }}</li>
+            <li>Project: <a href="/project?title={{ project_title }}">{{ project_title }}</a>, Grade: {{ grade }}</li>
         {% endfor %}
     </ul>
 {% else %}
