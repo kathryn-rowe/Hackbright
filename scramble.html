@@ -15,7 +15,7 @@
         while (playing) {
 
             // Grab a random word from the WORDS array.
-            var index_number = Math.floor(Math.random() * 4);
+            var index_number = Math.floor(Math.random() * WORDS.length);
             var randomWord = WORDS[index_number];
             console.log(randomWord);
 
@@ -28,6 +28,7 @@
             var user_guess = window.prompt(scrambledWord, "Guess the word here");
             if (user_guess != null) {
                 var user_guess = user_guess.toLowerCase();
+                var user_guess = user_guess.trim();
                 console.log(user_guess);
             }
 
@@ -50,3 +51,12 @@
     
 </body>
 </html>
+
+<!-- randomWordLetters = randomWord.split("")
+
+var scrambledNewWord = []
+for (var letter of randomWordLetters) {
+    var index_number = Math.floor(Math.random() * WORDS.length)
+    scrambledNewWord.push(randomWordLetters[index_number])
+}
+ -->
