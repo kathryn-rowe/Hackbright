@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Skills JavaScript</title>
   <link rel="stylesheet" href="/static/styles.css">
+  <script src="http://code.jquery.com/jquery.js"></script>
 </head>
 <body>
 
@@ -117,7 +118,7 @@
       word += msg[i];
     }
   
-   console.log(word);
+   // console.log(word);
 
    var newMsg = word;
 
@@ -159,7 +160,7 @@
 
 <script>
   "use strict";
-  // put your code here
+  $("#kittenz-rule").attr("src", "../static/puppy.jpg");
 </script>
 
 <div class="hint">
@@ -190,7 +191,57 @@
 
 <script>
   "use strict";
-  // put your code here
+
+  var randomNumber = Math.floor((Math.random() * 100) + 1);
+  console.log(randomNumber);
+
+  function changeDisableProp(identifier, trueFalse) {
+    //Disable or enable properties of guessing game form.
+
+    $(identifier).prop("disabled", trueFalse);
+  }
+
+  function pressPlay(evt) {
+    //Call changeDisableProp function when Play button is clicked. Prompted user for input.
+
+    changeDisableProp("#play-guessing-game", true);
+
+    $("#number-guessing-msg").html("Please guess a number between 1 -100.");
+
+    changeDisableProp("#number-guessed", false);
+    changeDisableProp("#try-this-number", false);
+  }
+  
+  function submitGuess(evt) {
+    //prevent Default submit button, find user's input guessed number, and see
+    //how it compares to the random number generated above.
+
+    evt.preventDefault();
+
+    var guessedNum = $("#number-guessed").val();
+
+    // var randomNumber = Math.floor((Math.random() * 100) + 1);
+    // console.log(randomNumber);
+
+    if (guessedNum > randomNumber) {
+      $("#number-guessing-msg").html("Your guess is too high.");
+    }
+    else if (guessedNum < randomNumber) {
+      $("#number-guessing-msg").html("Your guess is too low.");
+    }
+    else {
+      $("#number-guessing-msg").html("Congrats! That is the correct answer!");
+      changeDisableProp("#number-guessed", true);
+      changeDisableProp("#try-this-number", true);
+      changeDisableProp("#play-guessing-game", false);
+    }
+  }
+
+$("#play-guessing-game").on('click', pressPlay);
+$("#guessing-game-form").on('submit', submitGuess);
+ //If I worked on this game some more, I'd like to clear the random number
+ //and make the game re-playable.
+
 </script>
 
 
@@ -255,7 +306,16 @@
     $("#t-rex-img").append(tRexPhoto);
   }
 
-  // put your code here
+function getVictimName(evt) {
+    evt.preventDefault();
+
+    var formInputs = {
+        "victim-name": $("#victim-name").val(),
+    };
+$.post("/t-rex-attack.json", formInputs, showTRexResults);
+}
+
+$("#t-rex-form").on('submit', getVictimName);
 
 </script>
 
