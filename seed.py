@@ -49,6 +49,7 @@ def load_movies():
         movie_id, movie, release_date, __, imdb_url = row
         title = movie.split("(")
         title = title[0].rstrip()
+        title = title.decode("latin-1")
         if release_date:
             released_at = datetime.datetime.strptime(release_date, "%d-%b-%Y")
         else:
@@ -78,7 +79,7 @@ def load_ratings():
     Ratings.query.delete()
 
     # Read u.user file and insert data
-    for row in open("seed_data/u.data"):
+    for i, row in enumerate(open("seed_data/u.data")):
         row = row.rstrip()
         user_id, movie_id, score, __ = row.split("\t")
         user_id = int(user_id)
@@ -91,6 +92,9 @@ def load_ratings():
 
         # We need to add to the session or it won't ever be stored
         db.session.add(rating)
+
+        if i % 100 == 0:
+            print i
 
     # Once we're done, we should commit our work
     db.session.commit()
