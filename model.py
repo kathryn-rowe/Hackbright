@@ -51,9 +51,13 @@ class Ratings(db.Model):
     __tablename__ = "ratings"
 
     rating_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    movie_id = db.Column(db.Integer, nullable=True)
-    user_id = db.Column(db.Integer, nullable=True)
+    movie_id = db.Column(db.Integer, db.ForeignKey('movies.movie_id'), nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=True)
     score = db.Column(db.Integer, nullable=True)
+
+    user = db.relationship("User", backref=db.backref("ratings", order_by=rating_id))
+
+    movies = db.relationship("Movies", backref=db.backref("ratings", order_by=rating_id))
 
     def __repr__(self):
 
