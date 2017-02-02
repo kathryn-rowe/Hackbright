@@ -9,5 +9,17 @@
 <h2>Users</h2>
 <p><a href="/users">View all users</a></p>
 
-<h2><a href="/register_form">Register form</a>
+
+{% if session.get('logged_in') %}
+
+<h2><a href="/logout">Logout</a>
+
+{% else %}
+
+<h2><a href="/register">Register form</a>
+
+<h2><a href="/login">Log-in here form</a>
+
+{% endif %}
+
 {% endblock %}
