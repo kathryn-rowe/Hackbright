@@ -27,11 +27,40 @@ def index():
     return render_template("homepage.html")
 
 
+@app.route("/movies")
+def movies_list():
+
+    movies = Movies.query.order_by(Movies.title).all()
+    return render_template("movies_list.html", movies=movies)
+
+
+@app.route("/movie_info/<movie_id>")
+def get_movie_info(movie_id):
+
+    # users = User.query.all()
+    #user_id = request.args.get("user_id")
+    movies = Movies.query.filter(Movies.movie_id == movie_id).first()
+    ratings = movies.ratings
+
+    return render_template("movie_info.html", movies=movies, ratings=ratings)
+
+
 @app.route("/users")
 def user_list():
 
     users = User.query.all()
     return render_template("user_list.html", users=users)
+
+
+@app.route("/user_info/<user_id>")
+def get_user_info(user_id):
+
+    # users = User.query.all()
+    #user_id = request.args.get("user_id")
+    user = User.query.filter(User.user_id == user_id).first()
+    movies = db.session.query(Ratings).filter_by(user_id=user_id).all()
+
+    return render_template("user_info.html", user=user, movies=movies)
 
 
 @app.route("/register", methods=["GET"])
@@ -60,6 +89,7 @@ def register_process():
         db.session.add(new_user)
 
         db.session.commit()
+        user_id = new_user.user_id
         session["logged_in"] = username
 
         # print "We just create the user"
@@ -67,7 +97,7 @@ def register_process():
     else:
         flash("You've already registered. Please log-in.")
 
-    return redirect("/")
+    return redirect("/user_info/" + str(user_id))
 
 
 @app.route("/login", methods=["GET"])
@@ -93,8 +123,9 @@ def login_process():
         return redirect("/login")
     else:
         session["logged_in"] = username
+        user_id = emails.user_id
         flash("Logged in.")
-        return redirect("/")
+        return redirect("/user_info/" + str(user_id))
 
 
 @app.route("/logout")
@@ -104,6 +135,22 @@ def process_logout():
     del session["logged_in"]
     flash("Logged out.")
     return redirect("/")
+
+@app.route("/rating", methods=["POST"])
+def rating_process():
+
+    movie_id = request.args.get("movie_id")
+    score = request.form.get("rating")
+    #Use the session to find the user_id
+
+    movie = Movies.query.filter(Movies.movie_id == movie_id).first()
+
+    rating = Ratings(user_id=user_id,
+                         movie_id=movie_id,
+                         score=score)
+
+        # We need to add to the session or it won't ever be stored
+        db.session.add(rating)
 
 
 if __name__ == "__main__":
@@ -118,5 +165,5 @@ if __name__ == "__main__":
     DebugToolbarExtension(app)
 
 
-    
+
     app.run(port=5000, host='0.0.0.0')

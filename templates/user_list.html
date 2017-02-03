@@ -5,8 +5,8 @@
     <ul>
       {% for user in users %}
           <li>
-              <a href="/users/{{ user.user_id }}">
-                {{ user.email }} ({{ user.user_id }})
+              <a href="{{url_for('get_user_info', user_id = user.user_id)}}">
+                {{ user.email }} ({{ user.user_id }}) {{url_for('get_user_info', user_id = user.user_id)}}
               </a>
           </li>
       {% endfor %}
