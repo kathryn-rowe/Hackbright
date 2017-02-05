@@ -37,7 +37,7 @@ class Model(db.Model):
 
     model_id = db.Column(db.Integer, primary_key=True, nullable=False)
     year = db.Column(db.Integer, nullable=False)
-    brand_id = db.Column(db.String(5), nullable=False)
+    brand_id = db.Column(db.String(5), db.ForeignKey('brands.brand_id'), nullable=False)
     name = db.Column(db.String(50), nullable=False)
 
     brands = db.relationship('Brand')
