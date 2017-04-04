@@ -164,7 +164,6 @@ def replace_head(input_list):
     True
 
     """
-
     input_list[0] = 42
     pass
 
@@ -180,10 +179,10 @@ def replace_third_and_last(input_list):
     >>> replace_third_and_last(multiples)
     >>> multiples == [0, 3, 37, 9, 12, 15, 18, 21, 24, 37]
     True
+
     """
     input_list[2] = 37
     input_list[-1] = 37
-
     pass
 
 
@@ -200,15 +199,6 @@ def replace_middle(input_list):
     True
 
     """
-    # for element in input_list[2:-2]:
-    #     index = 0
-    #     if index % 2 == 0:
-    #         element = 42
-    #     else:
-    #         element = 37
-    #     index = index + 1
-    # print input_list
-
     input_list[2:-2] = [42, 37]
 
     pass
@@ -229,7 +219,6 @@ def delete_third_and_seventh(input_list):
     """
     del input_list[2]
     del input_list[5]
-
     pass
 
 

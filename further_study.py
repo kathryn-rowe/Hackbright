@@ -26,10 +26,10 @@ def custom_len(input_list):
         8
 
     """
-    num = 0
-    for element in input_list:
-        num = num +1
-    return num
+    count = 0
+    for item in input_list:
+        count += 1
+    return count
 
 
 # For the next four exercises, you'll need to be clever and think about ways
@@ -56,8 +56,7 @@ def custom_append(input_list, value):
         True
 
     """
-
-    pass
+    input_list[len(input_list):] = [value]
 
 
 def custom_extend(input_list, second_list):
@@ -75,8 +74,8 @@ def custom_extend(input_list, second_list):
         True
 
     """
-
-    pass
+    for item in second_list:
+        input_list[len(input_list):] = [item]
 
 
 def custom_insert(input_list, index, value):
@@ -94,7 +93,7 @@ def custom_insert(input_list, index, value):
 
     """
 
-    pass
+    input_list[index:index] = [value]
 
 
 def custom_remove(input_list, value):
@@ -112,8 +111,10 @@ def custom_remove(input_list, value):
         True
 
     """
-
-    pass
+    for item in enumerate(input_list):
+        if item[1] == value:
+            del input_list[item[0]]
+            break
 
 
 def custom_pop(input_list):
@@ -131,8 +132,9 @@ def custom_pop(input_list):
         ['Jan', 'Feb']
 
     """
-
-    return None
+    value = input_list[-1]
+    del input_list[-1]
+    return value
 
 
 def custom_index(input_list, value):
@@ -147,8 +149,9 @@ def custom_index(input_list, value):
         1
 
     """
-
-    return 0
+    for item in enumerate(input_list):
+        if item[1] == value:
+            return item[0]
 
 
 def custom_count(input_list, value):
@@ -163,8 +166,12 @@ def custom_count(input_list, value):
         2
 
     """
+    count = 0
+    for item in input_list:
+        if item == value:
+            count += 1
 
-    return 0
+    return count
 
 
 def custom_reverse(input_list):
@@ -182,8 +189,10 @@ def custom_reverse(input_list):
         True
 
     """
+    for index in range(len(input_list)/2):
+        index_to_swap = (index + 1) * -1
+        input_list[index], input_list[index_to_swap] = input_list[index_to_swap], input_list[index]
 
-    pass
 
 
 def custom_contains(input_list, value):
@@ -202,8 +211,10 @@ def custom_contains(input_list, value):
         True
 
     """
-
-    return None
+    for item in input_list:
+        if item == value:
+            return True
+    return False
 
 
 def custom_equality(some_list, another_list):
@@ -221,8 +232,18 @@ def custom_equality(some_list, another_list):
         False
 
     """
+    # Quick win
+    if len(some_list) != len(another_list):
+        return False
 
-    return None
+    index = 0
+
+    for item in range(len(some_list) - 1):
+        if some_list[item] == another_list[index]:
+            index += 1
+        else:
+            return False
+    return True
 
 
 ##############################################################################
