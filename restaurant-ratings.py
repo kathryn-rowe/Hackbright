@@ -34,12 +34,26 @@ def print_rest_rating(rest_rating):
     for restaurant, rating in rest_rating:
         print restaurant + " " + str(rating)
 
+
+def get_user_choice():
+    """Gets user's choice of whether to 1) seeing all the ratings (in alphabetical order),
+                                        2) adding a new restaurant (and rating it), or
+                                        3) quitting."""
+
+    user_choice = str(raw_input("Would you like to 1) see all the ratings (in alphabetical order), 2) add a new restaurant (and rating it), or 3) quit? >> "))
+
+    if user_choice == "1":
+        print_rest_rating(sorted_rest)
+        get_user_choice()
+    elif user_choice == "2":
+        get_user_rating()
+    else:
+        return
+
 filename = sys.argv[1]
 
 words = find_words(filename)
 
-get_user_rating()
-
 sorted_rest = sort_by_rest(words)
 
-print_rest_rating(sorted_rest)
+get_user_choice()
