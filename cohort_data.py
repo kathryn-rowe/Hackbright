@@ -49,7 +49,7 @@ def sort_by_cohort(filename):
         row = row.split("|")
         if row[0] != '' or row[1] != '':
             student_name = row[0] + " " + row[1]
-            all_students.append(student_name)
+
             if row[4] == "Winter 2016":
                 winter_16.append(student_name)
             elif row[4] == "Spring 2016":
@@ -131,7 +131,7 @@ def hogwarts_by_house(filename):
     all_hogwarts.append(dumbledores_army)
     all_hogwarts.append(ravenclaw)
     all_hogwarts.append(ghosts)
-    all_hogwarts.append(instructor)
+    all_hogwarts.append(instructors)
 
     for sector in all_hogwarts:
         sector.sort()
@@ -201,7 +201,27 @@ def find_name_duplicates(filename):
 
     duplicate_names = set()
 
-    # Code goes here
+    fall_15 = set()
+    winter_16 = set()
+    spring_16 = set()
+    summer_16 = set()
+
+    for row in open(filename):
+        row = row.rstrip()
+        student = row.split("|")
+
+        first_name, last_name, house, instructor, cohort = student
+
+        if cohort == "Fall 2015":
+            fall_15.add(last_name)
+        elif cohort == "Winter 2016":
+            winter_16.add(last_name)
+        elif cohort == "Spring 2016":
+            spring_16.add(last_name)
+        elif cohort == "Summer 2016":
+            summer_16.add(last_name)
+
+    duplicate_names = fall_15 & winter_16 & spring_16 & summer_16
 
     return duplicate_names
 
@@ -227,20 +247,32 @@ def find_house_members_by_student_name(student_list):
 
     """
 
-    # Code goes here
+    user_choice = raw_input("Which name should I search for? (first and last name, ex. Hermione Granger) >>")
 
-    return
+    for student in student_list:
+        name, house, instructor, cohort = student
+        if user_choice.lower() == name.lower():
+            print "%s was in house %s in the %s cohort" % (name, house, cohort)
+            print "The following students are also in their house:"
+
+            for other_students in student_list:
+                if other_students[3] == cohort and other_students[0] != name and other_students[1] == house:
+                    print other_students[0]
+            return
+
+    print "Could not find that student."
+
 
 
 #########################################################################################
 
 # Here is some useful code to run these functions!
 
-# print unique_houses("cohort_data.txt")
-# print sort_by_cohort("cohort_data.txt")
-# print hogwarts_by_house("cohort_data.txt")
-# all_students_data = all_students_tuple_list("cohort_data.txt")
-# print all_students_data
-# find_cohort_by_student_name(all_students_data)
-# print find_name_duplicates("cohort_data.txt")
-# find_house_members_by_student_name(all_students_data)
+print unique_houses("cohort_data.txt")
+print sort_by_cohort("cohort_data.txt")
+print hogwarts_by_house("cohort_data.txt")
+all_students_data = all_students_tuple_list("cohort_data.txt")
+print all_students_data
+find_cohort_by_student_name(all_students_data)
+print find_name_duplicates("cohort_data.txt")
+find_house_members_by_student_name(all_students_data)
