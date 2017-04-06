@@ -1,47 +1,57 @@
-"""This file should have our order classes in it."""
+"""Classes for melon orders."""
 
 
-class AbstractMelonOrder(object):
-    """ You fill in the rest """
-
-    def get_total(self):
-        """Calculate price."""
-
-        base_price = 5
-        total = (1 + self.tax) * self.qty * base_price
-        return total
-
-    def mark_shipped(self):
-        """Set shipped to true."""
-
-        self.shipped = True
+class DomesticMelonOrder(object):
+    """A melon order within the USA."""
 
     def __init__(self, species, qty):
-        """Initialize melon order attributes"""
+        """Initialize melon order attributes."""
 
         self.species = species
         self.qty = qty
         self.shipped = False
-
-class DomesticMelonOrder(AbstractMelonOrder):
-    """A domestic (in the US) melon order."""
-
-    def tax(self):
-        """Initialize melon order attributes"""
-
         self.order_type = "domestic"
         self.tax = 0.08
 
+    def get_total(self):
+        """Calculate price, including tax."""
 
-class InternationalMelonOrder(AbstractMelonOrder):
+        base_price = 5
+        total = (1 + self.tax) * self.qty * base_price
+
+        return total
+
+    def mark_shipped(self):
+        """Record the fact than an order has been shipped."""
+
+        self.shipped = True
+
+
+class InternationalMelonOrder(object):
     """An international (non-US) melon order."""
 
-    def tax(self, country_code):
-        """Initialize melon order attributes"""
+    def __init__(self, species, qty, country_code):
+        """Initialize melon order attributes."""
 
+        self.species = species
+        self.qty = qty
         self.country_code = country_code
+        self.shipped = False
         self.order_type = "international"
         self.tax = 0.17
+
+    def get_total(self):
+        """Calculate price, including tax."""
+
+        base_price = 5
+        total = (1 + self.tax) * self.qty * base_price
+
+        return total
+
+    def mark_shipped(self):
+        """Record the fact than an order has been shipped."""
+
+        self.shipped = True
 
     def get_country_code(self):
         """Return the country code."""
