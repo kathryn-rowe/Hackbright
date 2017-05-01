@@ -286,6 +286,19 @@ def remove_node(node):
     node.next = node.next.next
 
 
+def rev_string(astring):
+    """Return reverse of string using recursion.
+
+    You may NOT use the reversed() function!
+    >>> rev_string("porcupine")
+    'enipucrop'
+    >>> rev_string("ab")
+    'ba'
+    """
+    if len(astring) == 1:
+        return astring[0]
+
+    return astring[-1] + rev_string(astring[:-1])
 
 if __name__ == "__main__":
     print
