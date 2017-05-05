@@ -300,6 +300,69 @@ def rev_string(astring):
 
     return astring[-1] + rev_string(astring[:-1])
 
+
+def sort_ab(a, b):
+    """Given already-sorted lists, `a` and `b`, return sorted list of both.
+
+    You may not use sorted() or .sort().
+    >>> a = [1, 3, 5, 7]
+    >>> b = [2, 6, 8, 10]
+    >>> sort_ab(a, b)
+    [1, 2, 3, 5, 6, 7, 8, 10]
+    """
+
+    merged_list = []
+
+    index_a = 0
+    index_b = 0
+
+    while index_a < len(a) and index_b < len(b):
+
+        if a[index_a] < b[index_b]:
+            merged_list.append(a[index_a])
+            index_a += 1
+
+        else:
+            merged_list.append(b[index_b])
+            index_b += 1
+
+    merged_list.extend(a[index_a:])
+    merged_list.extend(b[index_b:])
+
+    return merged_list
+
+def split(astring, splitter):
+    """Split astring by splitter and return list of splits.
+    >>> split("i love balloonicorn", " ")
+    ['i', 'love', 'balloonicorn']
+
+    >>> split("that is which is that which is that", " that ")
+    ['that is which is', 'which is that']
+
+    >>> split("that is which is that which is that", "that")
+    ['', ' is which is ', ' which is ', '']
+
+    >>> split("hello world", "nope")
+    ['hello world']
+    """
+    new_list = []
+    index = 0
+
+    while index <= len(astring):
+
+        current = index
+        index = astring.find(splitter, index)
+
+        if index != -1:
+            new_list.append(astring[current:index])
+            index += len(splitter)
+
+        else:
+            new_list.append(astring[current:])
+            break
+    return new_list
+
+
 if __name__ == "__main__":
     print
     import doctest
