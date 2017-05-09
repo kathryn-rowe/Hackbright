@@ -1,0 +1,84 @@
+Part 1: Discussion Questions
+
+Recursion
+
+1. In your own words, what is recursion?
+is = (what is recursion?)
+Recursion happens when a function calls itself; a repetitive process.
+
+2. Why is it necessary to have a base case?
+When a function works recursively, it calls itself and doesn't return anything
+until it hits the base case. Without a base case, the function will continue to
+work "inwardly" without having an endpoint.
+
+Graphs
+
+1. What is a graph?
+A data structure that links "relationships." It's similar to a tree, but the root 
+can link to grandchildren and form a web. There's more of a "flow" to the relationships,
+with connections being between many different nodes within the web and no direct
+hierarchy.
+
+2. How is a graph different from a tree?
+Like I wrote above, there's not a clearly defined root that only has children.
+A graph can link nodes through multiple edges and form web-like relationships. 
+They can also be cyclical and undirected, which trees cannot do.
+
+3. Give an example of something that would be good to model with a graph.
+I always refer to the food chain example, but another example could be a nutrient cycle.
+
+Data Structure      Index   Search  Add-R   Add-L   Pop-L   Pop-R
+Python List (Array) O(1)    O(n)    O(1)    O(n)    O(n)    O(1)         
+
+Linked List         O(n)    O(n)    O(1)    O(1)    O(1)    O(n)     
+(with a def. tail)
+
+Doubly-Linked List  O(n)    O(n)    O(1)    O(1)    O(1)    O(1)     
+
+Queue (as Array)    X       X       X       X       O(n)    O(1)
+
+Queue (as LL or 
+DLL)                X       X       X       X       O(1)    O(1)
+
+Stack (as Array, 
+LL, or DLL)         X       X       X       X       O(n)    O(1)
+
+Deque (as DLL)      X       X       O(1)    O(1)    O(1)    O(1)         
+
+
+Data Structure      Get         Add         Delete      Iterate     Memory
+Dictionary 
+(Hash Map)          O(1)        O(1)        O(1)        O(n)        medium
+
+Set (Hash Map)      O(1)        O(1)        O(1)        O(n)        medium                   
+
+Binary Search Tree  O(log n)    O(log n)    O(log n)    O(n)        low            
+
+tree                O(n)        O(1)        O(1)        O(n)        low                     
+
+
+Sorting
+
+1. Describe in words how the Bubble Sort algorithm works.
+It starts at the begining of a list of numbers. It compares the first two numbers
+and switches the largest to the direction that the sort is happening (right in 
+examples). The second and third are then compared and the largesst number is placed to 
+direction of the sort. This continues until the end of the list. This process iterates
+over the list again and again until the number on the right (direction of the sort) is 
+highest.
+
+2. Describe in words how the Merge Sort algorithm works.
+The sort: a list of numbers is divided into two lists recursively until one number can
+be compared to the other. For example, a list of 8 will be split into two lists of 4. 
+Those two lists are split into lists of 2 one at a time, and then two lists of 1. The merge: numbers 
+from each sorted list are compared to each other (looping through each list one by one and 
+comparing). With the example, you'll start with two lists of one and merge into one list with
+largest number last. As the two sections of the original lists come together, each number is compared
+to a number from the other list. They're compiled into sorted list.
+
+3. Describe in words how the Quick Sort algorithm works.
+A random number in a list is chosen. Numbers are arranged according to the pivot value; lower numbers
+to the left, higher to the right. You loop through the list and see if the numbers passed are higher
+or lower than the pivot. A pivot divider stays at the location of lower numbers, and once the 
+loop hits the pivot, the pivot is put between the numbers lower and higher than it. This continues
+until numbers are sorted.
