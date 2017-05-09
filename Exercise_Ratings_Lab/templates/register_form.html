@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Register here:</h1>
+
+    <form action="/register" method="POST" id="sign-in form">
+        <label for="username">Username:</label>
+        <input id="username-id" type="text" name="username" placeholder="email">
+        <br>
+
+        <label for="password">Password:</label>
+        <input id="username-id" type="password" name="password" placeholder="Password" required>
+        <br>
+
+        <label for="age">Your age:</label>
+        <input id="age" type="text" name="age" placeholder="ex. 19">
+        <br>
+
+        <label for="zipcode">Your zipcode:</label>
+        <input id="zipcode" type="text" name="zipcode" placeholder="ex. 94117">
+        <br>
+
+        <input type="submit">
+        <br>
+    </form>
+
+{% endblock %}
