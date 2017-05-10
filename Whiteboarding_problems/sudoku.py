@@ -1,5 +1,5 @@
-def solve(board):
-    """Return boolean for whether sudoku board is solvable"""
+def solve_sudoku(board):
+    """Is the board solvable?"""
 
     if is_full(board):
 
