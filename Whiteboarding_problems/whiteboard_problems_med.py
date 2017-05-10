@@ -363,6 +363,84 @@ def split(astring, splitter):
     return new_list
 
 
+def sum_list(nums):
+    """Using recursion, return the sum of numbers in a list.
+    >>> sum_list([5, 5])
+    10
+    >>> sum_list([-5, 10, 4])
+    9
+    >>> sum_list([20])
+    20
+    >>> sum_list([])
+    0
+    """
+
+    if nums == []:
+        return 0
+
+    return nums[0] + sum_list(nums[1:])
+
+
+class Node2(object):
+    """Class in a linked list."""
+
+    def __init__(self, data, next=None):
+        self.data = data
+        self.next = next
+
+    def as_string(self):
+        """Represent data for this node and it's successors as a string.
+        >>> Node2(3).as_string()
+        '3'
+        >>> Node2(3, Node2(2, Node2(1))).as_string()
+        '321'
+        """
+        out = []
+        n = self
+
+        while n:
+            out.append(str(n.data))
+            n = n.next
+
+        return "".join(out)
+
+
+def reverse_linked_list(head):
+    """Given LL head node, return head node of new, reversed linked list.
+    >>> ll = Node2(1, Node2(2, Node2(3)))
+    >>> new_ll = reverse_linked_list(ll)
+    >>> new_ll.as_string()
+    '321'
+    """
+    out_head = None
+    n = head
+
+    while n:
+        out_head = Node(n.data, out_head)
+        n = n.next
+
+    return out_head
+
+
+def lemur(branches):
+    """Return number of jumps needed.
+    >>> lemur([0])
+    0
+    >>> lemur([0, 0])
+    1
+    >>> lemur([0, 0, 0])
+    1
+    >>> lemur([0, 1, 0])
+    1
+    >>> lemur([0, 0, 1, 0])
+    2
+    >>> lemur([0, 0, 0, 0, 1, 0, 0, 1, 0])
+    5
+    """
+
+    assert branches[0] == 0, "First branch must be alive"
+    assert branches[-1] == 0, "Last branch must be alive"
+
 if __name__ == "__main__":
     print
     import doctest
