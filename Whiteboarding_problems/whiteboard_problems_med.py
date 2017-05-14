@@ -441,6 +441,24 @@ def lemur(branches):
     assert branches[0] == 0, "First branch must be alive"
     assert branches[-1] == 0, "Last branch must be alive"
 
+    if len(branches) == 1:
+        return 0
+    if len(branches) == 2:
+        return 1
+
+    pos = 0
+    count = 0
+
+    while pos < (len(branches) - 1):
+        if branches[pos + 2] == 1 and branches[pos + 1] == 0:
+            count += 1
+            pos += 1
+        elif branches[pos + 2] == 0:
+            count += 1
+            pos += 2
+    return count
+
+
 if __name__ == "__main__":
     print
     import doctest
