@@ -162,6 +162,49 @@ def calc(s):
     return total
 
 
+def check(king, queen):
+    """Given a chessboard with one K and one Q, see if the K can attack the Q.
+
+    This function is given coordinates for the king and queen on a chessboard.
+    These coordinates are given as a letter A-H for the columns and 1-8 for the
+    row, like "D6" and "B7":
+    >>> check("D6", "H6")
+    True
+    >>> check("E6", "E4")
+    True
+    >>> check("B7", "D5")
+    True
+    >>> check("A1", "H8")
+    True
+    >>> check("A8", "H1")
+    True
+    >>> check("D6", "H7")
+    False
+    >>> check("E6", "F4")
+    False
+    """
+    board = [["A", "B", "C", "D", "E", "F", "G", "H"],
+             ["A", "B", "C", "D", "E", "F", "G", "H"],
+             ["A", "B", "C", "D", "E", "F", "G", "H"],
+             ["A", "B", "C", "D", "E", "F", "G", "H"],
+             ["A", "B", "C", "D", "E", "F", "G", "H"],
+             ["A", "B", "C", "D", "E", "F", "G", "H"],
+             ["A", "B", "C", "D", "E", "F", "G", "H"],
+             ["A", "B", "C", "D", "E", "F", "G", "H"]]
+
+
+    king_row = king[1]
+    king_col = king[0]
+    queen_row = queen[1]
+    queen_col = queen[0]
+
+    if queen_col == king_col or queen_row == king_row:
+        return True
+
+    if king is diagonal:
+        up or down a row and back or forward a column
+        keep looking through board
+
 if __name__ == "__main__":
     print
     import doctest
