@@ -183,27 +183,29 @@ def check(king, queen):
     >>> check("E6", "F4")
     False
     """
-    board = [["A", "B", "C", "D", "E", "F", "G", "H"],
-             ["A", "B", "C", "D", "E", "F", "G", "H"],
-             ["A", "B", "C", "D", "E", "F", "G", "H"],
-             ["A", "B", "C", "D", "E", "F", "G", "H"],
-             ["A", "B", "C", "D", "E", "F", "G", "H"],
-             ["A", "B", "C", "D", "E", "F", "G", "H"],
-             ["A", "B", "C", "D", "E", "F", "G", "H"],
-             ["A", "B", "C", "D", "E", "F", "G", "H"]]
+    # board = [["A", "B", "C", "D", "E", "F", "G", "H"],
+    #          ["A", "B", "C", "D", "E", "F", "G", "H"],
+    #          ["A", "B", "C", "D", "E", "F", "G", "H"],
+    #          ["A", "B", "C", "D", "E", "F", "G", "H"],
+    #          ["A", "B", "C", "D", "E", "F", "G", "H"],
+    #          ["A", "B", "C", "D", "E", "F", "G", "H"],
+    #          ["A", "B", "C", "D", "E", "F", "G", "H"],
+    #          ["A", "B", "C", "D", "E", "F", "G", "H"]]
 
+    col_values = {"A": 1, "B": 2, "C": 3, "D": 4, "E": 5, "F": 6, "G": 7, "H": 8}
 
-    king_row = king[1]
-    king_col = king[0]
-    queen_row = queen[1]
-    queen_col = queen[0]
+    king_row = int(king[1])
+    king_col_letter = king[0]
+    king_col = col_values[king_col_letter]
 
-    if queen_col == king_col or queen_row == king_row:
+    queen_row = int(queen[1])
+    queen_col_letter = queen[0]
+    queen_col = col_values[queen_col_letter]
+
+    if queen_col_letter == king_col_letter or queen_row == king_row:
         return True
 
-    if king is diagonal:
-        up or down a row and back or forward a column
-        keep looking through board
+    return abs(king_row - queen_row) == abs(king_col - queen_col)
 
 if __name__ == "__main__":
     print
