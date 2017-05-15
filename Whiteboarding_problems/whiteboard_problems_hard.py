@@ -64,7 +64,7 @@ def has_balanced_brackets(phrase):
     return stack == []
 
 
-class Node:
+class Node3:
     """Binary search tree node."""
 
     def __init__(self, data, left=None, right=None):
@@ -206,6 +206,143 @@ def check(king, queen):
         return True
 
     return abs(king_row - queen_row) == abs(king_col - queen_col)
+
+
+def coins(num_coins):
+    """Find change from combinations of `num_coins` of dimes and pennies.
+
+    This should return a set of the unique amounts of change possible.
+    >>> coins(1) == {1, 10}
+    True
+    >>> coins(2) == {2, 11, 20}
+    True
+    >>> coins(3) == {3, 12, 21, 30}
+    True
+    >>> coins(4) == {4, 13, 22, 31, 40}
+    True
+    >>> coins(10) == {10, 19, 28, 37, 46, 55, 64, 73, 82, 91, 100}
+    True
+    """
+    results = set()
+
+    for dimes in range(0, num_coins + 1):
+        pennies = num_coins - dimes
+        results.add(dimes * 10 + pennies)
+
+    return results
+
+
+class Node2(object):
+    """Node in a tree."""
+
+    def __init__(self, name, children=None):
+        self.name = name
+        self.children = children or []
+
+    def count_employees(self):
+        """Return a count of how many employees this person manages.
+
+        Return a count of how many people that manager manages. This should
+        include *everyone* under them, not just people who directly report to
+        them.
+        """
+        count = 0
+        for child in self.children:
+            count = count + 1 + child.count_employees()
+
+        return count
+
+
+def dec2bin_back(num):
+    """Convert a decimal number to binary representation.
+    >>> dec2bin_back(6)
+    '110'
+    """
+    results = []
+    place = 0
+
+    while place == 0 or num >= 2**place:
+
+        if num % 2 ** (place + 1):
+            num -= 2 ** place
+            results.append("1")
+        else:
+            results.append("0")
+        place += 1
+
+    return "".join(reversed(results))
+
+
+def dec2bin_forward(num):
+    """Convert a decimal number to binary representation.
+    >>> dec2bin_forward(6)
+    '110'
+    """
+    out = ""
+    num_bits = 1
+
+    while 2**num_bits <= num:
+        num_bits += 1
+
+    for position in range(num_bits-1, -1, -1):
+
+        if 2**position <= num:
+            num -= 2 ** position
+            out += "1"
+        else:
+            out += "0"
+
+    return out
+
+
+# def hex_convert(hex_in):
+#     """Convert a hexadecimal string, like '1A', into it's decimal equivalent.
+#     >>> from hexconvert import hex_convert
+#     >>> hex_convert('6')
+#     6
+#     >>> hex_convert('1A')
+#     26
+#     >>> hex_convert('FFFF')
+#     65535
+#     """
+
+
+def largest_sum(nums):
+    """Find subsequence with largest sum.
+    >>> largest_sum([1, 0, 3, -8, 4, -2, 3])
+    [4, -2, 3]
+    >>> largest_sum([1, 0, 3, -8, 4, -2, 3, -2])
+    [4, -2, 3]
+    >>> largest_sum([1, 0, 3, -8, 19, -20, 4, -2, 3, -2])
+    [19]
+    >>> largest_sum([2, 2, -10, 1, 3, -20])
+    [2, 2]
+    >>> largest_sum([2, -2, 3, -1])
+    [3]
+    >>> largest_sum([-1, -2])
+    []
+    """
+    best_sum = 0
+    start_best = 0
+    end_best = -1
+
+    current_sum = 0
+    start_current = 0
+
+    for i, n in enumerate(nums):
+        current_sum += n
+
+        if current_sum > best_sum:
+            best_sum = current_sum
+            start_best = start_current
+            end_best = i
+
+        if current_sum <= 0:
+            start_current = i + 1
+            current_sum = 0
+
+    return nums[start_best:end_best+1]
+
 
 if __name__ == "__main__":
     print
