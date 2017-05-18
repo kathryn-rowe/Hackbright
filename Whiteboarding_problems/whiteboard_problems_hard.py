@@ -328,7 +328,7 @@ def find_carrots(four_cells, nrows, ncols, garden):
     best = None
 
     for row, col in cell_lst:
-        print row, col
+        # print row, col
         if num_carrots < garden[row][col]:
             best = row, col
             num_carrots = garden[row][col]
@@ -419,31 +419,175 @@ def largest_sum(nums):
     return nums[start_best:end_best+1]
 
 
-def parse(phrase, vocab):
-    """Break a string into words.
+class DLLNode(object):
+    """Doubly-linked node."""
 
-    Input:
-        - string of words without space breaks
-        - vocabulary (set of allowed words)
+    def __init__(self, data, prev=None, next=None):
+        self.data = data
+        self.prev = prev
+        self.next = next
 
-    Output:
-        set of all possible ways to break this down, given a vocab
-    >>> vocab = {'i', 'a', 'ten', 'oodles', 'ford', 'inner', 'to',
-    ...   'night', 'ate', 'noodles', 'for', 'dinner', 'tonight'}
-    >>> sentences = parse'iatenoodlesfordinnertonight', vocab)
-    >>> for s in sorted(sentences):
-    ...    print s
-    i a ten oodles for dinner to night
-    i a ten oodles for dinner tonight
-    i a ten oodles ford inner to night
-    i a ten oodles ford inner tonight
-    i ate noodles for dinner to night
-    i ate noodles for dinner tonight
-    i ate noodles ford inner to night
-    i ate noodles ford inner tonight
+    def __repr__(self):
+        return "<Node prev=%s data=%s next=%s>" % (
+            self.prev.data, self.data, self.next.data)
+
+    @classmethod
+    def make_list(cls, num):
+
+        first = node = prev = cls(1)
+
+        # Make all other nodes
+        for i in range(2, num + 1):
+            node = DLLNode(i, prev=prev)
+            prev.next = node
+            prev = node
+
+        # Fix the last and first node's prev/next
+        node.next = first
+        first.prev = node
+
+        return first
+
+
+def find_survivor(num_people, kill_every):
+    """Given num_people in circle, kill [kill_every]th person, return survivor.
+    >>> find_survivor(10, 3)
+    4
     """
-    pass
+    node = DLLNode.make_list(num_people)
 
+    while node.next != node:
+        # get to the third node
+        for i in range(kill_every - 1):
+            node = node.next
+        # when you get to the third node, kill it
+        node.prev.next = node.next
+        node.next.prev = node.prev
+
+        node = node.next
+
+    return node. data
+
+
+def primes(count):
+    """Return count number of prime numbers, starting at 2.
+    >>> primes(1)
+    [2]
+    >>> primes(5)
+    [2, 3, 5, 7, 11]
+    """
+    def _is_prime(num):
+        if num < 2:
+            return False
+
+        if num == 2:
+            return True
+
+        if num % 2 == 0:
+            return False
+
+        n = 3
+
+        while n * n <= num:
+            if num % n == 0:
+                return False
+            n += 2
+        return True
+
+    primes = [2]
+    num = 3
+
+    while len(primes) < count:
+        if _is_prime(num):
+            primes.append(num)
+        num += 1
+
+    return primes
+
+
+def rev(s):
+    """Reverse word-order in string, preserving spaces.
+    >>> rev("")
+    ''
+    >>> rev("hello")
+    'hello'
+    >>> rev("hello world")
+    'world hello'
+    >>> rev(" hello  world   ")
+    '   world  hello '
+    """
+    in_space = None
+    tokens = []
+    current_token = ''
+
+    for letter in s:
+        if letter == " ":
+            if not in_space:
+                tokens.append(current_token)
+                current_token = ''
+                in_space = True
+        else:
+            if in_space:
+                tokens.append(current_token)
+                current_token = ''
+                in_space = False
+        current_token += letter
+    tokens.append(current_token)
+
+    return "".join(reversed(tokens))
+
+
+class Node5(object):
+    """Doubly-linked node in a tree.
+        >>> na = Node5("na")
+        >>> nb1 = Node5("nb1")
+        >>> nb2 = Node5("nb2")
+        >>> nb1.set_parent(na)
+        >>> nb2.set_parent(na)
+        >>> na.children
+        [<Node nb1>, <Node nb2>]
+        >>> nb1.parent
+        <Node na>
+    """
+    parent = None
+
+    def __init__(self, data):
+        self.children = []
+        self.data = data
+
+    def __repr__(self):
+        return "<Node %s>" % self.data
+
+    def set_parent(self, parent):
+        """Set parent of this node.
+        Also sets the children of the parent to include this node.
+        """
+        self.parent = parent
+        parent.children.append(self)
+
+    def siblings(self):
+        """Find nodes on the same level as this node.
+        >>> b.cousins() == {c, d}
+        True
+        >>> c.cousins() == {b, d}
+        True
+        >>> e.cousins() == {f, g, h, i, j}
+        True
+        >>> k.cousins() == {l}
+        True
+        >>> a.cousins() == set()
+        True
+        """
+        if self.parent is not None:
+            parent = self.parent
+            kids = parent.children
+        siblings = set()
+
+        for kid in kids:
+            if self.data != kid:
+                siblings.add(kid)
+
+        return siblings
 
 
 if __name__ == "__main__":
