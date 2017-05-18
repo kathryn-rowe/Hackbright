@@ -295,16 +295,91 @@ def dec2bin_forward(num):
     return out
 
 
-# def hex_convert(hex_in):
-#     """Convert a hexadecimal string, like '1A', into it's decimal equivalent.
-#     >>> from hexconvert import hex_convert
-#     >>> hex_convert('6')
-#     6
-#     >>> hex_convert('1A')
-#     26
-#     >>> hex_convert('FFFF')
-#     65535
-#     """
+def hex_convert(hex_in):
+    """Convert a hexadecimal string, like '1A', into it's decimal equivalent.
+    >>> hex_convert('6')
+    6
+    >>> hex_convert('1A')
+    26
+    >>> hex_convert('FFFF')
+    65535
+    """
+    letter_val = {"A": 10, "B": 11, "C": 12, "D": 13, "E": 14, "F": 15}
+
+    total = 0
+    hex_val = 1
+
+    for char in hex_in[-1::-1]:
+        if char in letter_val:
+            total += hex_val * letter_val[char]
+        else:
+            total += hex_val * int(char)
+        hex_val *= 16
+
+    return total
+
+
+def find_carrots(four_cells, nrows, ncols, garden):
+
+    cell_lst = [(row, col) for row, col in four_cells
+                if 0 <= row < nrows and 0 <= col < ncols]
+
+    num_carrots = 0
+    best = None
+
+    for row, col in cell_lst:
+        print row, col
+        if num_carrots < garden[row][col]:
+            best = row, col
+            num_carrots = garden[row][col]
+    return best
+
+
+def lunch_count(garden):
+    """Given a garden of nrows of ncols, return carrots eaten.
+    >>> garden = [
+    ...     [2, 3, 1, 4, 2, 2, 3],
+    ...     [2, 3, 0, 4, 0, 3, 0],
+    ...     [1, 7, 0, 2, 1, 2, 3],
+    ...     [9, 3, 0, 4, 2, 0, 3],
+    ... ]
+    >>> lunch_count(garden)
+    15
+    """
+
+    # Sanity check that garden is valid
+
+    row_lens = [len(row) for row in garden]
+    assert min(row_lens) == max(row_lens), "Garden not a matrix!"
+    assert all(type(c) is int for c in row for row in garden), \
+        "Garden values must be ints!"
+
+    # Get number of rows and columns
+
+    nrows = len(garden)
+    ncols = len(garden[0])
+
+    four_cells = [(((nrows - 1) / 2), ((ncols - 1) / 2)),
+                  (((nrows - 1) / 2), ((ncols - 0) / 2)),
+                  (((nrows - 0) / 2), ((ncols - 1) / 2)),
+                  (((nrows - 0) / 2), ((ncols - 0) / 2))]
+
+    eaten = 0
+
+    while True:
+
+        current = find_carrots(four_cells, nrows, ncols, garden)
+
+        if not current:
+            return eaten
+
+        row, col = current
+
+        eaten += garden[row][col]
+
+        garden[row][col] = 0
+
+        four_cells = [(row, col-1), (row - 1, col), (row, col + 1), (row + 1, col)]
 
 
 def largest_sum(nums):
@@ -342,6 +417,33 @@ def largest_sum(nums):
             current_sum = 0
 
     return nums[start_best:end_best+1]
+
+
+def parse(phrase, vocab):
+    """Break a string into words.
+
+    Input:
+        - string of words without space breaks
+        - vocabulary (set of allowed words)
+
+    Output:
+        set of all possible ways to break this down, given a vocab
+    >>> vocab = {'i', 'a', 'ten', 'oodles', 'ford', 'inner', 'to',
+    ...   'night', 'ate', 'noodles', 'for', 'dinner', 'tonight'}
+    >>> sentences = parse'iatenoodlesfordinnertonight', vocab)
+    >>> for s in sorted(sentences):
+    ...    print s
+    i a ten oodles for dinner to night
+    i a ten oodles for dinner tonight
+    i a ten oodles ford inner to night
+    i a ten oodles ford inner tonight
+    i ate noodles for dinner to night
+    i ate noodles for dinner tonight
+    i ate noodles ford inner to night
+    i ate noodles ford inner tonight
+    """
+    pass
+
 
 
 if __name__ == "__main__":
