@@ -539,15 +539,6 @@ def rev(s):
 
 class Node5(object):
     """Doubly-linked node in a tree.
-        >>> na = Node5("na")
-        >>> nb1 = Node5("nb1")
-        >>> nb2 = Node5("nb2")
-        >>> nb1.set_parent(na)
-        >>> nb2.set_parent(na)
-        >>> na.children
-        [<Node nb1>, <Node nb2>]
-        >>> nb1.parent
-        <Node na>
     """
     parent = None
 
@@ -567,27 +558,73 @@ class Node5(object):
 
     def siblings(self):
         """Find nodes on the same level as this node.
-        >>> b.cousins() == {c, d}
+        >>> a = Node5("a")
+        >>> b = Node5("b")
+        >>> c = Node5("c")
+        >>> b.set_parent(a)
+        >>> c.set_parent(a)
+        >>> a.children
+        [<Node b>, <Node c>]
+        >>> b.parent
+        <Node a>
+        >>> b.siblings() == set(['c'])
         True
-        >>> c.cousins() == {b, d}
+        >>> c.siblings() == set(['b'])
         True
-        >>> e.cousins() == {f, g, h, i, j}
-        True
-        >>> k.cousins() == {l}
-        True
-        >>> a.cousins() == set()
+        >>> a.siblings() == set()
         True
         """
+        siblings = set()
+
         if self.parent is not None:
             parent = self.parent
             kids = parent.children
-        siblings = set()
 
-        for kid in kids:
-            if self.data != kid:
-                siblings.add(kid)
+            for kid in kids:
+                if self != kid:
+                    siblings.add(kid.data)
 
         return siblings
+
+# a = Node5("a")
+# b = Node5("b")
+# c = Node5("c")
+# b.set_parent(a)
+# c.set_parent(a)
+# print b.siblings()
+
+
+class BinaryNode(object):
+    """Node in a binary tree."""
+
+    def __init__(self, data, left=None, right=None):
+        self.data = data
+        self.left = left
+        self.right = right
+
+    def is_balanced(self):
+        """Is the tree at this node balanced?"""
+        def _num_decendents(node):
+
+            if not node:
+                return 0
+
+            left = _num_decendents(node.left)
+
+            if left is None:
+                return None
+
+            right = _num_decendents(node.right)
+
+            if right is None:
+                return None
+
+            if abs(left - right) > 1:
+                return None
+
+            return max(left, right) + 1
+
+        return _num_decendents(self) is not None
 
 
 if __name__ == "__main__":
